@@ -1,0 +1,66 @@
+.notification-select {
+    position: absolute;
+    top: 110%;
+    right: -350px;
+    width: 350px;
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 1rem 0rem .5rem 0rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    animation: showModal .4s linear forwards;
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: gray;
+    }
+    ul {
+        padding: 0;
+        .active {
+            font-weight: 500;
+            background-color: #f1f1f1;
+        }
+        li {
+            list-style-type: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            padding: 0 1rem;
+            cursor: pointer;
+            &:hover {
+                background-color: #f1f1f1;
+                border-radius: 5px;
+            }
+        }
+    }
+}
+
+.hident-select {
+    animation: hidentModal .3s linear;
+}
+
+@keyframes showModal {
+    0% {
+        transform: translateX(0);
+        opacity: .5;
+    }
+    100% {
+        transform: translateX(-370px);
+        opacity: 1;
+    }
+}
+
+@keyframes hidentModal {
+    100% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    0% {
+        transform: translateX(-270px);
+        opacity: 1;
+    }
+}

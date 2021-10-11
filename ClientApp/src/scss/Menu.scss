@@ -1,0 +1,50 @@
+.menu {
+    padding-top: 5rem;
+    width: 250px;
+    // padding-left: 1rem;
+    border-right: 1px solid rgb(202, 196, 196);
+    background-color: #fafafa;
+    height: 100vh;
+    position: fixed;
+    .header {
+        padding-left: 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding-bottom: 1rem;
+    }
+    ul {
+        padding: 0;
+        li {
+            list-style-type: none;
+            height: 40px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            a {
+                padding-left: 2rem;
+                font-size: 1rem;
+                font-weight: 500;
+                color: rgb(110, 103, 103);
+                width: 100%;
+            }
+            &:hover {
+                color: #db4c3e;
+                background-color: #f1f1f1;
+                a {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    .active {
+        background-color: #f1f1f1;
+        a {
+            color: #db4c3e;
+        }
+    }
+}
+
+.content {
+    margin-left: 250px;
+    padding: 4rem 1rem 1rem 1rem;
+}

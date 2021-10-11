@@ -1,0 +1,39 @@
+.message {
+    background-color: rgb(240, 119, 49);
+    top: 10px;
+    right: 10px;
+    width: 400px;
+    border-radius: 5px;
+    color: white;
+    position: fixed;
+    padding-left: 2.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    animation: showMess .5s;
+}
+
+.hident {
+    animation: hidentMess .5s forwards;
+}
+
+@keyframes showMess {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes hidentMess {
+    100% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

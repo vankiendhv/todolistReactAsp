@@ -1,0 +1,35 @@
+.header-nav {
+    height: 50px;
+    width: 100%;
+    background-color: #DB4C3F;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: fixed;
+    z-index: 100;
+    .icon {
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 1rem;
+        cursor: pointer;
+        position: relative;
+        svg {
+            width: inherit;
+            height: inherit;
+            color: white;
+        }
+    }
+    .number {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        color: white;
+        font-size: .6rem;
+        padding: .1rem .4rem;
+        border-radius: 50%;
+        background-color: yellowgreen;
+    }
+}
