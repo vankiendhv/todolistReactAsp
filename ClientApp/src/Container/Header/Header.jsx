@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import notificationApi from "../../Api/notificationApi";
-import { loadHeader, NumberJobNoActive } from "../function";
+import tokenNotificationApi from "../../Api/tokenNotificationApi";
+import userApi from "../../Api/userApi";
+import { loadHeader, messageShowSuccess, NumberJobNoActive } from "../function";
 import { login, notification } from "../icons/iconSvg";
 import Notification from "./Notification/Notification";
 export default function Header({ loadName }) {
@@ -23,7 +25,7 @@ export default function Header({ loadName }) {
     const onLoad = (e) => {
         setLoad(e);
     };
-    loadHeader(load, onLoad);
+    // loadHeader(load, onLoad);
     return (
         <div className="header-nav">
             <div className="notification">
@@ -55,8 +57,20 @@ export default function Header({ loadName }) {
                 <Link
                     to="/login"
                     onClick={() => {
-                        localStorage.removeItem("loginTodolist");
-                        localStorage.removeItem("nameTodolist");
+                        // localStorage.removeItem("loginTodolist");
+                        // localStorage.removeItem("nameTodolist");
+                        userApi.logOut().then((data) => {
+                            if (data === "Success") {
+                                messageShowSuccess("Đăng xuất thành công!");
+                            }
+                            tokenNotificationApi.deleteTokenNotification({
+                                token: localStorage.getItem("tokenDrive"),
+                                userId: localStorage.getItem("userId"),
+                            });
+
+                            localStorage.removeItem("tokenTodolist");
+                            localStorage.removeItem("userId");
+                        });
                     }}
                     title="Login"
                 >

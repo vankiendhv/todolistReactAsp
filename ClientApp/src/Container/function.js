@@ -6,8 +6,6 @@ export const messageShowErr = (e) => {
     return Toastify({
         text: e,
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
         close: true,
         gravity: "top", // `top` or `bottom`
         position: "center", // `left`, `center` or `right`
@@ -20,8 +18,6 @@ export const messageShowSuccess = (e) => {
     return Toastify({
         text: e,
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
         close: true,
         gravity: "top", // `top` or `bottom`
         position: "center", // `left`, `center` or `right`
@@ -98,66 +94,66 @@ const getJobImportant = (e) => {
 export const NumberJobNoActive = (e) => {
     return e.length;
 };
-let timeReset = "9:50:0";
-export const loadNotification = (load, onload) => {
-    setInterval(() => {
-        let timeToday = new Date();
-        let time =
-            timeToday.getHours() +
-            ":" +
-            timeToday.getMinutes() +
-            ":" +
-            timeToday.getSeconds();
+// let timeReset = "9:50:0";
+// export const loadNotification = (load, onload) => {
+//     setInterval(() => {
+//         let timeToday = new Date();
+//         let time =
+//             timeToday.getHours() +
+//             ":" +
+//             timeToday.getMinutes() +
+//             ":" +
+//             timeToday.getSeconds();
 
-        if (time == timeReset) {
-            setTimeout(() => {
-                onload(!load);
-            }, 200);
-        }
-    }, 1000);
-};
-export const loadHeader = (load, onload) => {
-    setInterval(() => {
-        let timeToday = new Date();
-        let time =
-            timeToday.getHours() +
-            ":" +
-            timeToday.getMinutes() +
-            ":" +
-            timeToday.getSeconds();
-        if (time == timeReset) {
-            setTimeout(() => {
-                onload(!load);
-            }, 200);
-        }
-    }, 1000);
-};
-export const checkNotification = (e) => {
-    let NumberJob = NumberJobNoActive(e[0]);
-    let jobImportant = getJobImportant(e[0])[0];
-    let jobNotImportant = getJobImportant(e[0])[1];
-    setInterval(() => {
-        let timeToday = new Date();
-        let time =
-            timeToday.getHours() +
-            ":" +
-            timeToday.getMinutes() +
-            ":" +
-            timeToday.getSeconds();
-        if (time == timeReset) {
-            notificationApi.postNotification({
-                content: `Hôm nay bạn có ${NumberJob} việc, ${jobImportant} quan trọng và ${jobNotImportant} không quan trọng`,
-                status: 0,
-                userId: localStorage.getItem("loginTodolist"),
-            });
-            sendMailApi.sendmail({
-                from: "vankienars98@gmail.com",
-                to: "chjkien9x@gmail.com",
-                subject: "Thông báo việc làm hôm nay",
-                gmail: "vankienars98@gmail.com",
-                password: "vankienars98",
-                body: `Hôm nay bạn có ${NumberJob} việc, ${jobImportant} quan trọng và ${jobNotImportant} không quan trọng. Truy cập ngay website để biết thêm chi tiết: https://localhost:5001`,
-            });
-        }
-    }, 1000);
-};
+//         if (time == timeReset) {
+//             setTimeout(() => {
+//                 onload(!load);
+//             }, 200);
+//         }
+//     }, 1000);
+// };
+// export const loadHeader = (load, onload) => {
+//     setInterval(() => {
+//         let timeToday = new Date();
+//         let time =
+//             timeToday.getHours() +
+//             ":" +
+//             timeToday.getMinutes() +
+//             ":" +
+//             timeToday.getSeconds();
+//         if (time == timeReset) {
+//             setTimeout(() => {
+//                 onload(!load);
+//             }, 200);
+//         }
+//     }, 1000);
+// };
+// export const checkNotification = (e) => {
+//     let NumberJob = NumberJobNoActive(e[0]);
+//     let jobImportant = getJobImportant(e[0])[0];
+//     let jobNotImportant = getJobImportant(e[0])[1];
+//     setInterval(() => {
+//         let timeToday = new Date();
+//         let time =
+//             timeToday.getHours() +
+//             ":" +
+//             timeToday.getMinutes() +
+//             ":" +
+//             timeToday.getSeconds();
+//         if (time == timeReset) {
+//             notificationApi.postNotification({
+//                 content: `Hôm nay bạn có ${NumberJob} việc, ${jobImportant} quan trọng và ${jobNotImportant} không quan trọng`,
+//                 status: 0,
+//                 userId: localStorage.getItem("loginTodolist"),
+//             });
+//             sendMailApi.sendmail({
+//                 from: "vankienars98@gmail.com",
+//                 to: "chjkien9x@gmail.com",
+//                 subject: "Thông báo việc làm hôm nay",
+//                 gmail: "vankienars98@gmail.com",
+//                 password: "vankienars98",
+//                 body: `Hôm nay bạn có ${NumberJob} việc, ${jobImportant} quan trọng và ${jobNotImportant} không quan trọng. Truy cập ngay website để biết thêm chi tiết: http://localhost:5000`,
+//             });
+//         }
+//     }, 1000);
+// };

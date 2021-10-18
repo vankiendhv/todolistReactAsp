@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todolistReactAsp.Connection;
@@ -6,6 +7,7 @@ using todolistReactAsp.Models;
 
 namespace todolistReactAsp.Controllers
 {
+    [Authorize]
     [Route("api/categories")]
     public class CategoryController : ControllerBase
     {
@@ -14,6 +16,7 @@ namespace todolistReactAsp.Controllers
         {
             _context = context;
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todolistReactAsp.Connection;
@@ -8,6 +9,7 @@ using todolistReactAsp.Models;
 
 namespace todolistReactAsp.Controllers
 {
+    [Authorize]
     [Route("api/jobs")]
     public class JobController : ControllerBase
     {
@@ -23,7 +25,7 @@ namespace todolistReactAsp.Controllers
             if (category == 0 && tag == 0)
             {
                 var query = _context.Job.Where(n => n.UserId == id).AsQueryable()
-                .OrderBy(n => n.Id)
+                .OrderByDescending(n => n.Id)
                 .Include(n => n.TagJob)
                 .Select(x => new
                 {
@@ -41,7 +43,7 @@ namespace todolistReactAsp.Controllers
             else if (category == 0 && tag != 0)
             {
                 var query = _context.Job.Where(n => n.UserId == id && n.TagJob.Any(q => q.TagId == tag)).AsQueryable()
-                .OrderBy(n => n.Id)
+                .OrderByDescending(n => n.Id)
                 .Include(n => n.TagJob)
                 .Select(x => new
                 {
@@ -59,7 +61,7 @@ namespace todolistReactAsp.Controllers
             else if (category != 0 && tag == 0)
             {
                 var query = _context.Job.Where(n => n.UserId == id && n.CategoryId == category).AsQueryable()
-                .OrderBy(n => n.Id)
+                .OrderByDescending(n => n.Id)
                 .Include(n => n.TagJob)
                 .Select(x => new
                 {
@@ -77,7 +79,7 @@ namespace todolistReactAsp.Controllers
             else if (category != 0 && tag != 0)
             {
                 var query = _context.Job.Where(n => n.UserId == id && n.CategoryId == category && n.TagJob.Any(q => q.TagId == tag)).AsQueryable()
-                .OrderBy(n => n.Id)
+                .OrderByDescending(n => n.Id)
                 .Include(n => n.TagJob)
                 .Select(x => new
                 {
@@ -119,6 +121,12 @@ namespace todolistReactAsp.Controllers
         {
             return e.Length == 1 ? ("0" + e) : e;
         }
+
+        //  public string getJob(Array e)
+        // {
+
+        // }
+        [AllowAnonymous]
         [HttpGet("getJobToday/{id}")]
         public IActionResult GeJobToday(int id)
         {
@@ -132,7 +140,7 @@ namespace todolistReactAsp.Controllers
                 x.Important,
                 x.Time,
                 x.UserId,
-            });
+            }).ToArray();
             return Ok(query);
         }
         [HttpPost]

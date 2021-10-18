@@ -26,10 +26,9 @@ export default function Category({ categoryIdLoadPage, tagIdLoadPage }) {
         idJob: "",
         time: "",
         categoryid: "",
-        userid: "",
+        userid: localStorage.getItem("userId"),
         important: 0,
         load: false,
-        userid: "",
     });
     const {
         name,
@@ -68,7 +67,7 @@ export default function Category({ categoryIdLoadPage, tagIdLoadPage }) {
         setTimeout(() => {
             jobApi
                 .getAll({
-                    id: localStorage.getItem("loginTodolist"),
+                    id: localStorage.getItem("userId"),
                     tag: tagIdLoadPage,
                     category: categoryIdLoadPage,
                 })
@@ -82,7 +81,6 @@ export default function Category({ categoryIdLoadPage, tagIdLoadPage }) {
         categoryApi.getTag().then((data) => {
             setTag(data);
         });
-        setState({ ...state, userid: localStorage.getItem("loginTodolist") });
     }, []);
     const hangldeSubmit = async (e) => {
         e.preventDefault();

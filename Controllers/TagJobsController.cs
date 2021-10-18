@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using todolistReactAsp.Connection;
@@ -7,6 +8,7 @@ using todolistReactAsp.Models;
 
 namespace todolistReactAsp.Controllers
 {
+    [Authorize]
     [Route("api/tagJobs")]
     public class TagJobsController : ControllerBase
     {
@@ -31,7 +33,6 @@ namespace todolistReactAsp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            // var _tag = _context.TagJob.FirstOrDefaultAsync(n => n.JobId == id).Result;
             var _tag = _context.TagJob.Where(n => n.JobId == id);
             if (_tag != null)
             {

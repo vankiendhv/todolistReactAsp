@@ -3,22 +3,27 @@ import { Link, useHistory } from "react-router-dom";
 import userApi from "../../Api/userApi";
 import { messageShowErr, messageShowSuccess } from "../function";
 export default function Login({ load, onload }) {
-    const history = useHistory();
     const [UserName, setUserName] = useState("");
     const [Password, setPassword] = useState("");
+    const history = useHistory();
 
     const hangdldeSubmit = (e) => {
         e.preventDefault();
         userApi.login({ UserName, Password }).then((data) => {
-            const dataValue = data.split(" ");
-            if (dataValue[0] === "Error") {
-                messageShowErr("Sai tên đăng nhập hoặc mật khẩu!");
+            if (data === "Invalid") {
+                messageShowErr("Tài khoản hoặc mật khẩu không chính xác!");
+            } else if (data === "Lock") {
+                messageShowErr(
+                    "Bạn nhập sai quá nhiều lần tài khoản hiện đã bị khoá!"
+                );
             } else {
                 messageShowSuccess("Đăng nhập thành công!");
-                localStorage.setItem("loginTodolist", dataValue[1]);
-                localStorage.setItem("nameTodolist", dataValue[2]);
-                onload(!load);
-                history.push("/");
+                localStorage.setItem("tokenTodolist", data.accessToken);
+                localStorage.setItem("userId", data.id);
+                setTimeout(() => {
+                    onload(!load);
+                    history.push("/");
+                }, 200);
             }
         });
     };

@@ -8,7 +8,6 @@ namespace todolistReactAsp.Models
         public string Time { get; set; }
         public int Important { get; set; }
         public string File { get; set; }
-
         public int UserId { get; set; }
         public User User { get; set; }
         public int CategoryId { get; set; }

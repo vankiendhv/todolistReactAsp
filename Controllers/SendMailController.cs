@@ -2,12 +2,14 @@ using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using todolistReactAsp.Connection;
 using todolistReactAsp.Models;
 
 namespace todolistReactAsp.Controllers
 {
+    [Authorize]
     [Route("api/sendMail")]
     public class SendMailController : ControllerBase
     {

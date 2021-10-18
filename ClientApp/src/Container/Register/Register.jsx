@@ -9,8 +9,9 @@ export default function Register() {
         Name: "",
         UserName: "",
         Password: "",
+        loading: false,
     });
-    const { Name, UserName, Password } = state;
+    const { Name, UserName, Password, loading } = state;
     const hangdleOnChange = (e) => {
         const { value, name } = e.target;
         setState({
@@ -25,9 +26,17 @@ export default function Register() {
             messageShowErr("Bạn chưa nhập đầy đủ!");
         } else {
             if (checkEmail(UserName)) {
+                setState({ ...state, loading: true });
                 userApi.postUser({ Name, UserName, Password }).then((data) => {
-                    messageShowSuccess("Đăng ký thành công!");
-                    history.push("/login");
+                    if (data === "Success") {
+                        messageShowSuccess(
+                            "Đăng ký thành công vui lòng vào kiểm tra email để tiến hành đăng nhập!"
+                        );
+                        setState({ ...state, loading: false });
+                    } else {
+                        messageShowErr("Đăng ký thất bại!");
+                        setState({ ...state, loading: false });
+                    }
                 });
             } else {
                 messageShowErr("Email không hợp lệ!");
@@ -75,9 +84,15 @@ export default function Register() {
                     <div className="register">
                         <Link to="/login">Đăng nhập</Link>
                     </div>
-                    <div className="btn">
-                        <button>Đăng ký</button>
-                    </div>
+                    {loading ? (
+                        <div className="btn">
+                            <p>Vui lòng đợi</p>
+                        </div>
+                    ) : (
+                        <div className="btn">
+                            <button>Đăng ký</button>
+                        </div>
+                    )}
                 </form>
             </div>
         </div>

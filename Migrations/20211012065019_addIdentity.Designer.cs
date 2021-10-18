@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using todolistReactAsp.Connection;
@@ -9,9 +10,10 @@ using todolistReactAsp.Connection;
 namespace todolistReactAsp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20211012065019_addIdentity")]
+    partial class addIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,26 +318,6 @@ namespace todolistReactAsp.Migrations
                     b.ToTable("TagJob");
                 });
 
-            modelBuilder.Entity("todolistReactAsp.Models.TokenNotification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Token")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TokenNotification");
-                });
-
             modelBuilder.Entity("todolistReactAsp.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -517,17 +499,6 @@ namespace todolistReactAsp.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("todolistReactAsp.Models.TokenNotification", b =>
-                {
-                    b.HasOne("todolistReactAsp.Models.User", "User")
-                        .WithMany("TokenNotifications")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("todolistReactAsp.Models.Category", b =>
                 {
                     b.Navigation("Jobs");
@@ -550,8 +521,6 @@ namespace todolistReactAsp.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("RefreshTokens");
-
-                    b.Navigation("TokenNotifications");
                 });
 #pragma warning restore 612, 618
         }
